@@ -1,8 +1,7 @@
----
 - name: install necessary packages
   apt:
     update_cache: yes
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   with_items:
     - awscli
@@ -10,3 +9,4 @@
     - default-jdk
     - nginx
     - python-pip
+    - jq
