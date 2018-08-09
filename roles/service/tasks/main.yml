@@ -1,0 +1,24 @@
+- name: Create start k8s service
+  shell:
+    chdir: /etc/systemd/system/
+    creates: k8s.service
+    cmd: |
+      cat > k8s.service <<EOF
+      [Unit]
+      Description=Start k8s service
+      After=network.target
+
+      [Service]
+      User=ubuntu
+      ExecStart=/bin/bash /home/ubuntu/k8s.sh
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+      EOF
+
+- name: List files in system
+  shell:
+    chdir: /etc/systemd/system/
+    cmd: |
+      echo *

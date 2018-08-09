@@ -1,0 +1,38 @@
+---
+-
+  name: "Starting nginx on boot"
+  service:
+    enabled: true
+    name: nginx
+    state: started
+-
+  command: "rm -rf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default"
+  name: "Removing nginx default.conf"
+-
+  name: "Adding nginx configuration"
+  shell:
+    chdir: /etc/nginx/sites-available/
+    cmd: |
+        sudo bash -c 'cat > default <<EOF
+        server {
+          listen 80;
+          server_name jenkins.thegaijin.xyz;
+          access_log /var/log/nginx-access.log;
+          error_log /var/log/nginx-error.log;
+            location / {
+              proxy_pass http://127.0.0.1:8080/;
+              proxy_set_header Host \$host;
+              proxy_set_header X-Forwarded-Proto \$scheme;
+              proxy_set_header X-Real-IP \$remote_addr;
+              proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+              proxy_redirect http://localhost:8080 $scheme://jenkins.thegaijin.xyz;
+          }
+        }
+        EOF'
+    creates: default
+-
+  command: "ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/"
+  name: "Creating symbolic link"
+-
+  command: "systemctl restart nginx"
+  name: "Reload nginx"

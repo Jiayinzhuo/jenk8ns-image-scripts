@@ -1,0 +1,43 @@
+{
+  "variables": {
+    "access_key": "{{env `aws_access_key`}}",
+    "secret_key": "{{env `aws_secret_key`}}"
+  },
+
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "us-east-1",
+      "access_key": "{{user `access_key`}}",
+      "secret_key": "{{user `secret_key`}}",
+      "source_ami": "ami-759bc50a",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "Jenk8ns-{{isotime | clean_ami_name}}",
+      "ami_description": "Jenkins + Kubernetes image",
+      "tags": {
+        "role": "Jenk8ns-05-08"
+      },
+      "run_tags": {
+        "role": "buildJenk8ns"
+      }
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "./.env",
+      "destination": "/home/ubuntu/.env"
+    },
+    {
+      "type": "file",
+      "source": "./k8s.sh",
+      "destination": "/home/ubuntu/k8s.sh"
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "jenk8ns-playbook.yml"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+---
+- name: Start kubernetes
+  shell: |
+    sudo systemctl daemon-reload
+    sudo systemctl enable k8s.service
+    sudo systemctl start k8s.service
+...
