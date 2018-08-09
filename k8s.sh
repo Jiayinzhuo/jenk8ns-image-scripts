@@ -1,4 +1,4 @@
-. .env
+. /home/ubuntu/.env
 
 echo "Get s3 bucket..."
 ## creating cluster state storage
