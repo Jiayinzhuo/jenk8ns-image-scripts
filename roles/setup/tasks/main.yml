@@ -14,5 +14,5 @@
 - name: copy key into the user directory
   copy:
     src: /Users/svictor/DevOps/Microservices/new-piggy/jenk8ns-image-scripts/cp3-ami-us-east-1-key-pair.pem
-    dest: /home/ubuntu//Users/svictor/DevOps/Microservices/new-piggy/jenk8ns-image-scriptscp3-ami-us-east-1-key-pair.pem
+    dest: /home/ubuntu/cp3-ami-us-east-1-key-pair.pem
     mode: 0400
