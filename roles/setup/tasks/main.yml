@@ -21,4 +21,4 @@
   shell:
     chdir: /home/ubuntu/
     cmd: |
-      openssl rsa -in cp3-ami-us-east-1-key-pair.pem -pubout > /home/ubuntu/id_rsa.pub
+      ssh-keygen -y -f cp3-ami-us-east-1-key-pair.pem -pubout > /home/ubuntu/id_rsa.pub
