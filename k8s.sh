@@ -27,7 +27,7 @@ fi
 
 echo "Creating cluster..."
 # creating a cluster
-kops create cluster --dns-zone thegaijin.xyz --zones us-east-1a --master-size t2.micro --node-size t2.micro --name cluster.thegaijin.xyz --yes
+kops create cluster --dns-zone thegaijin.xyz --zones us-east-1a --master-size t2.micro --node-size t2.micro --name $NAME --ssh-public-key /home/ubuntu/id_rsa.pub --yes
 while true; do
   kops validate cluster --name $NAME | grep 'is ready' &> /dev/null
   if [ $? == 0 ]; then

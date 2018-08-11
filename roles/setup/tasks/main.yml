@@ -16,3 +16,9 @@
     src: /Users/svictor/DevOps/Microservices/new-piggy/jenk8ns-image-scripts/cp3-ami-us-east-1-key-pair.pem
     dest: /home/ubuntu/cp3-ami-us-east-1-key-pair.pem
     mode: 0400
+
+- name: Create public ssh key
+  shell:
+    chdir: /home/ubuntu/
+    cmd: |
+      openssl rsa -in cp3-ami-us-east-1-key-pair.pem -pubout > /home/ubuntu/id_rsa.pub
