@@ -16,9 +16,3 @@
       [Install]
       WantedBy=multi-user.target
       EOF
-
-- name: List files in system
-  shell:
-    chdir: /etc/systemd/system/
-    cmd: |
-      echo *
