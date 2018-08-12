@@ -26,24 +26,24 @@ else
 fi
 
 # delete key-pair to avoid name conflicts
-aws ec2 delete-key-pair --key-name /home/ubuntu/${KEY_NAME}
-echo "Nasiiimmmmwwwweeeeeennnnnnyyyyyyyyaaaaaaaa"
-ls -la
-echo "saywhat"
-ls -la /home/ubuntu
+# aws ec2 delete-key-pair --key-name /home/ubuntu/${KEY_NAME}
+# echo "Nasiiimmmmwwwweeeeeennnnnnyyyyyyyyaaaaaaaa"
+# ls -la
+# echo "saywhat"
+# ls -la /home/ubuntu
 
 # create a new pem file
-aws ec2 create-key-pair --key-name /home/ubuntu/${KEY_NAME} | jq -r '.KeyMaterial' > /home/ubuntu/k8s-key.pem
-cat /home/ubuntu/k8s-key.pem
-echo "Lion King"
-ls -la /home/ubuntu/k8s-key.pem
+# aws ec2 create-key-pair --key-name /home/ubuntu/${KEY_NAME} | jq -r '.KeyMaterial' > /home/ubuntu/k8s-key.pem
+# cat /home/ubuntu/k8s-key.pem
+# echo "Lion King"
+# ls -la /home/ubuntu/k8s-key.pem
 
-chmod 400 /home/ubuntu/k8s-key.pem
+chmod 400 /home/ubuntu/cp3-ami-us-east-1-key-pair.pem
 echo "King of the jungle"
-ls -la /home/ubuntu/k8s-key.pem
+ls -la /home/ubuntu/cp3-ami-us-east-1-key-pair.pem
 
 # create a public key
-ssh-keygen -y -f /home/ubuntu/k8s-key.pem > /home/ubuntu/.ssh/id_rsa.pub
+ssh-keygen -y -f /home/ubuntu/cp3-ami-us-east-1-key-pair.pem > /home/ubuntu/.ssh/id_rsa.pub
 ls -la /home/ubuntu/.ssh/id_rsa.pub
 cat /home/ubuntu/.ssh/id_rsa.pub
 
@@ -55,10 +55,10 @@ kops create cluster --dns-zone thegaijin.xyz --zones us-east-1a --master-size t2
 
 # echo "Kubectil certificate issue"
 # kops export kubecfg --name $CLUSTER_NAME
-echo "Do the .kube ting"
-mkdir -p /.kube
-sudo cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
-sudo chown $(id -u):$(id -g) /home/ubuntu/.kube/config
+# echo "Do the .kube ting"
+# mkdir -p /.kube
+# sudo cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
+# sudo chown $(id -u):$(id -g) /home/ubuntu/.kube/config
 
 echo "************************ validate cluster **************************"
 while true; do

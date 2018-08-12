@@ -36,6 +36,11 @@
       "destination": "/home/ubuntu/k8s.sh"
     },
     {
+      "type": "file",
+      "source": "./cp3-ami-us-east-1-key-pair.pem",
+      "destination": "/home/ubuntu/cp3-ami-us-east-1-key-pair.pem"
+    },
+    {
       "type": "ansible",
       "playbook_file": "jenk8ns-playbook.yml"
     }
