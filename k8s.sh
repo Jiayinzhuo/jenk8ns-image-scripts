@@ -16,13 +16,10 @@ for name in $( echo ${buckets} | jq -c '.[]'); do
 done
 
 if [ ${found_bucket} == false ]; then
-	echo "Create s3 bucket..."
-	export BUCKET_NAME=k8s-$(date +%s)
-	echo $BUCKET_NAME
+	echo "Create the bucket..."
+	export BUCKET_NAME=$BUCKET_NAME
 	aws s3api create-bucket --bucket $BUCKET_NAME
 	export KOPS_STATE_STORE=s3://$BUCKET_NAME
-else
-	echo "Using existing s3 bucket..."
 fi
 
 echo "Generate public key from pem file"
@@ -35,7 +32,7 @@ echo "************************ validate cluster **************************"
 while true; do
   kops validate cluster --name $CLUSTER_NAME | grep 'is ready' &> /dev/null
   if [ $? == 0 ]; then
-     break
+    break
   fi
     sleep 30
 done
@@ -44,7 +41,12 @@ echo "<<<<<<<<<<<<< get the cluster >>>>>>>>>>>>>"
 kops get cluster
 kubectl cluster-info
 
-echo "The end"
+echo "Add Dashboard"
+kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.4.0.yaml
+
+echo "Add jenkins user to docker group"
+sudo usermod -a -G docker jenkins
+sudo service jenkins restart
 
 echo "Give Jenkins rights to run kubernetes"
 sudo mkdir -p /var/lib/jenkins/.kube

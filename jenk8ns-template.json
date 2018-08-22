@@ -37,7 +37,7 @@
     },
     {
       "type": "file",
-      "source": "./cp3-ami-us-east-1-key-pair.pem",
+      "source": "./jenk8ns-key-pair.pem",
       "destination": "/home/ubuntu/cp3-ami-us-east-1-key-pair.pem"
     },
     {
