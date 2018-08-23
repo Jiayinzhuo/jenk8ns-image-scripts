@@ -11,6 +11,7 @@
       [Service]
       User=ubuntu
       ExecStart=/bin/bash /home/ubuntu/k8s.sh
+      Restart=always
 
       [Install]
       WantedBy=multi-user.target

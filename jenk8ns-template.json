@@ -16,7 +16,7 @@
       "ami_name": "Jenk8ns-{{isotime | clean_ami_name}}",
       "ami_description": "Jenkins + Kubernetes image",
       "tags": {
-        "role": "Jenk8ns-13-08"
+        "role": "Jenk8ns-23-08"
       },
       "run_tags": {
         "role": "buildJenk8ns"

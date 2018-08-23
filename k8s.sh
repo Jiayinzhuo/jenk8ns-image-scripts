@@ -40,9 +40,16 @@ done
 echo "<<<<<<<<<<<<< get the cluster >>>>>>>>>>>>>"
 kops get cluster
 kubectl cluster-info
+kubectl apply namespace ingress
 
 echo "Add Dashboard"
 kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.4.0.yaml
+
+echo "Add ingress"
+kubectl create namespace ingress-nginx
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/service-l4.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/patch-configmap-l4.yaml
 
 echo "Add jenkins user to docker group"
 sudo usermod -a -G docker jenkins
