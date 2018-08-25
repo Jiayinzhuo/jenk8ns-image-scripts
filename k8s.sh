@@ -23,8 +23,8 @@ if [ ${found_bucket} == false ]; then
 fi
 
 echo "Generate public key from pem file"
-chmod 400 /home/ubuntu/cp3-ami-us-east-1-key-pair.pem
-ssh-keygen -y -f /home/ubuntu/cp3-ami-us-east-1-key-pair.pem > /home/ubuntu/.ssh/id_rsa.pub
+chmod 400 /home/ubuntu/jenk8ns-key-pair.pem
+ssh-keygen -y -f /home/ubuntu/jenk8ns-key-pair.pem > /home/ubuntu/.ssh/id_rsa.pub
 
 echo "Creating cluster..."
 kops create cluster --dns-zone thegaijin.xyz --zones us-east-1a --master-size t2.micro --node-size t2.micro --name $CLUSTER_NAME --ssh-public-key /home/ubuntu/.ssh/id_rsa.pub --yes
@@ -48,8 +48,11 @@ kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addon
 echo "Add ingress"
 kubectl create namespace ingress-nginx
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/service-l4.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/patch-configmap-l4.yaml
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+helm init
+helm install stable/nginx-ingress --name my-nginx --set rbac.create=true
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/service-l4.yaml
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/patch-configmap-l4.yaml
 
 echo "Add jenkins user to docker group"
 sudo usermod -a -G docker jenkins

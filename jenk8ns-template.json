@@ -13,10 +13,10 @@
       "source_ami": "ami-759bc50a",
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
-      "ami_name": "Jenk8ns-{{isotime | clean_ami_name}}",
+      "ami_name": "Jenk8ns-helm-{{isotime | clean_ami_name}}",
       "ami_description": "Jenkins + Kubernetes image",
       "tags": {
-        "role": "Jenk8ns-23-08"
+        "role": "Jenk8ns-helm-23-08"
       },
       "run_tags": {
         "role": "buildJenk8ns"
@@ -38,7 +38,7 @@
     {
       "type": "file",
       "source": "./jenk8ns-key-pair.pem",
-      "destination": "/home/ubuntu/cp3-ami-us-east-1-key-pair.pem"
+      "destination": "/home/ubuntu/jenk8ns-key-pair.pem"
     },
     {
       "type": "ansible",

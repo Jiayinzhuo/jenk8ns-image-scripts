@@ -5,7 +5,7 @@
 
   vars:
     dir: /home/ubuntu/
-    app_dir: /home/ubuntu/Piggymetrics
+    app_dir: /home/ubuntu/micro-k8s
     ansible_python_interpreter: '/usr/bin/python3'
 
   roles:
