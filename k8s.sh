@@ -42,16 +42,18 @@ done
 echo "<<<<<<<<<<<<< get the cluster >>>>>>>>>>>>>"
 kops get cluster
 kubectl cluster-info
-kubectl apply namespace ingress
+#kubectl apply namespace ingress
 
 echo "Add Dashboard"
 kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.4.0.yaml
 
 echo "Add ingress"
 kubectl create namespace ingress-nginx
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
+kubectl apply -f https://github.com/kubernetes/ingress-nginx/tree/master/deploy/static/mandatory.yaml
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 helm init
+echo "helm install nginx-ingress"
 helm install stable/nginx-ingress --name my-nginx --set rbac.create=true
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/service-l4.yaml
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/patch-configmap-l4.yaml
