@@ -36,7 +36,7 @@ while true; do
   if [ $? == 0 ]; then
     break
   fi
-    sleep 30
+    sleep 60
 done
 
 echo "<<<<<<<<<<<<< get the cluster >>>>>>>>>>>>>"
