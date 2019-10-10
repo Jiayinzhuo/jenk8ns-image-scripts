@@ -57,6 +57,8 @@ echo "helm install nginx-ingress"
 helm install stable/nginx-ingress --name my-nginx --set rbac.create=true
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/service-l4.yaml
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/patch-configmap-l4.yaml
+kubectl apply -f dashboard-adminuser.yaml
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
 
 echo "Add jenkins user to docker group"
 sudo usermod -a -G docker jenkins
