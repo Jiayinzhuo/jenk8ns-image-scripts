@@ -36,7 +36,7 @@ while true; do
   if [ $? == 0 ]; then
     break
   fi
-    sleep 60
+    sleep 90
 done
 
 echo "<<<<<<<<<<<<< get the cluster >>>>>>>>>>>>>"
@@ -44,8 +44,11 @@ kops get cluster
 kubectl cluster-info
 #kubectl apply namespace ingress
 
-echo "Add Dashboard"
-kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.4.0.yaml
+echo "Add Dashboard and User"
+#kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.4.0.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/Jiayinzhuo/jenk8ns-image-scripts/master/dashboard-adminuser.yaml
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
 
 echo "Add ingress"
 kubectl create namespace ingress-nginx
@@ -57,8 +60,6 @@ echo "helm install nginx-ingress"
 helm install stable/nginx-ingress --name my-nginx --set rbac.create=true
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/service-l4.yaml
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/provider/aws/patch-configmap-l4.yaml
-kubectl apply -f dashboard-adminuser.yaml
-kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
 
 echo "Add jenkins user to docker group"
 sudo usermod -a -G docker jenkins
@@ -70,3 +71,13 @@ sudo cp ~/.kube/config /var/lib/jenkins/.kube/
 cd /var/lib/jenkins/.kube/
 sudo chown jenkins:jenkins config
 sudo chmod 750 config
+
+echo "<<<<<<<<<<<<< get the cluster again >>>>>>>>>>>>>"
+kubectl cluster-info
+kubectl get nodes
+kubectl get services
+kubectl get deployments --all-namespaces
+kubectl -n kube-system get po
+kubectl get serviceAccounts
+kubectl config view --minify | grep namespace:
+kubectl config view
