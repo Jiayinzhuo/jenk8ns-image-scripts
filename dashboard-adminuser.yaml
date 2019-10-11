@@ -2,17 +2,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: admin-user
-  namespace: default 
-
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  namespace: default
-  name: service-reader
-rules:
-- apiGroups: [""] 
-  resources: ["services"]
-  verbs: ["get", "list", "watch"]
+  namespace: kubernetes-dashboard
 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -21,16 +11,8 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: service-reader
+  name: cluster-admin
 subjects:
 - kind: ServiceAccount
   name: admin-user
-  namespace: default 
-
-
-
-
-
-
-
-
+  namespace: kubernetes-dashboard
