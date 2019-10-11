@@ -11,7 +11,7 @@ metadata:
   name: service-reader
 rules:
 - apiGroups: [""] 
-  resources: ["services", "secrets", "pods", "pods/log", "deployments", "jobs"]
+  resources: ["services"]
   verbs: ["get", "list", "watch"]
 
 apiVersion: rbac.authorization.k8s.io/v1
