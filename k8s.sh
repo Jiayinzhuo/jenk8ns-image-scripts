@@ -45,11 +45,11 @@ kubectl cluster-info
 #kubectl apply namespace ingress
 
 echo "Add Dashboard and User"
+#kubectl -n kubernetes-dashboard delete $(kubectl -n kubernetes-dashboard get pod -o name | grep dashboard)
 #kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.4.0.yaml
 #kubectl create secret generic kubernetes-dashboard-certs --from-file=$HOME/certs -n kubernetes-dashboard
 kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
 #kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/alternative.yaml
-
 #kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
 kubectl apply -f https://raw.githubusercontent.com/Jiayinzhuo/jenk8ns-image-scripts/master/dashboard-adminuser.yaml
 kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
@@ -84,7 +84,8 @@ kubectl get deployments --all-namespaces
 #kubectl -n kube-system get po
 echo "kubectl get serviceAccounts"
 kubectl get serviceAccounts
-echo "kubectl config view --minify | grep namespace:"
-kubectl config view --minify | grep namespace:
+#echo "kubectl config view --minify | grep namespace:"
+#kubectl config view --minify | grep namespace:
 echo "kubectl config view"
 kubectl config view
+
