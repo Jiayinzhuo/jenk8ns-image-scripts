@@ -52,7 +52,7 @@ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-
 
 #kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
 kubectl apply -f https://raw.githubusercontent.com/Jiayinzhuo/jenk8ns-image-scripts/master/dashboard-adminuser.yaml
-kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+kubectl -n default describe secret $(kubectl -n default get secret | grep admin-user | awk '{print $1}')
 
 echo "Add ingress"
 kubectl create namespace ingress-nginx
