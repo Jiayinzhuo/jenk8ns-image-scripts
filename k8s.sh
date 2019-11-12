@@ -1,12 +1,34 @@
 . /home/ubuntu/.env
 
+echo "Get s3 bucket..."
+# Check available buckets
+buckets="$(aws s3api list-buckets | jq -r '.Buckets')"
+found_bucket=false
+
+# check if bucket already exists
+for name in $( echo ${buckets} | jq -c '.[]'); do
+	bucket_names=$(echo ${name} | jq -r '.Name')
+	the_bucket=$(echo ${bucket_names} | grep ${BUCKET_NAME})
+	if [[ ${the_bucket} == ${BUCKET_NAME} ]]; then
+	found_bucket=true
+	break
+	fi
+done
+
+if [ ${found_bucket} == false ]; then
+	echo "Create the bucket..."
+	export BUCKET_NAME=$BUCKET_NAME
+	aws s3api create-bucket --bucket $BUCKET_NAME
+	export KOPS_STATE_STORE=s3://$BUCKET_NAME
+fi
+
 echo "Generate public key from pem file"
 chmod 400 /home/ubuntu/jenk8ns-key-pair.pem
 ssh-keygen -y -f /home/ubuntu/jenk8ns-key-pair.pem > /home/ubuntu/.ssh/id_rsa.pub
 
 echo "Creating cluster..."
-kops create cluster --dns-zone jonathanzhuo.com --zones us-east-1a --master-size t2.medium --node-size t2.medium --name $CLUSTER_NAME --ssh-public-key /home/ubuntu/.ssh/id_rsa.pub --yes
-#echo "Updating cluster..."
+kops create cluster --dns-zone jonathanzhuo.com --zones us-east-1a --master-size t2.medium --node-size t2.medium --name $CLUSTER_NAME --state $KOPS_STATE_STORE --ssh-public-key /home/ubuntu/.ssh/id_rsa.pub --yes
+echo "Updating cluster..."
 #kops update cluster $CLUSTER_NAME --yes
 echo "************************ validate cluster **************************"
 while true; do
