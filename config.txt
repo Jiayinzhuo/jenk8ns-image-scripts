@@ -1,0 +1,25 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMwekNDQWJ1Z0F3SUJBZ0lNRmRiQ09ncy9OWUM4MmpXZk1BMEdDU3FHU0liM0RRRUJDd1VBTUJVeEV6QVIKQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13SGhjTk1Ua3hNVEV$
+    server: https://api.devopscluster.jonathanzhuo.com
+  name: devopscluster.jonathanzhuo.com
+contexts:
+- context:
+    cluster: devopscluster.jonathanzhuo.com
+    user: devopscluster.jonathanzhuo.com
+  name: devopscluster.jonathanzhuo.com
+current-context: devopscluster.jonathanzhuo.com
+kind: Config
+preferences: {}
+users:
+- name: devopscluster.jonathanzhuo.com
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMrekNDQWVPZ0F3SUJBZ0lNRmRiQ09uSmhhTE9UVXB2ME1BMEdDU3FHU0liM0RRRUJDd1VBTUJVeEV6QVIKQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13SGhjTk1Ua3hNVEV4TV$
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBcFpsbXhkcDhrZ2w0REt3emtSd1gyenJFZlA4VjJjZnJpUzV1OWN3d2xpVnJRd2ZSCmxTY29mcGh0YTlvSHpIa0xmeG9zRVpPTklQNnM2N25NVFRQVjFQb1$
+    password: mWoevr9oFKMXtjPdfMQ4eymcmKh2g5Lm
+    username: admin
+- name: devopscluster.jonathanzhuo.com-basic-auth
+  user:
+    password: mWoevr9oFKMXtjPdfMQ4eymcmKh2g5Lm
+    username: admin
