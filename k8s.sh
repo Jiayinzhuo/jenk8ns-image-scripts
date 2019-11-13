@@ -45,12 +45,9 @@ kubectl cluster-info
 #kubectl apply namespace ingress
 
 echo "Add Dashboard and User"
-#kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
-kubectl describe secret kubernetes-dashboard --namespace=kube-system
-#kubectl apply -f https://raw.githubusercontent.com/Jiayinzhuo/jenk8ns-image-scripts/master/dashboard-adminuser.yaml
-#kubectl -n default describe secret $(kubectl -n default get secret | grep admin-user | awk '{print $1}')
-#kubectl config set-credentials cluster-admin --token=bearer_token
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta4/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/Jiayinzhuo/jenk8ns-image-scripts/master/dashboard-adminuser.yaml
+kubectl -n default describe secret $(kubectl -n default get secret | grep admin-user | awk '{print $1}')
 
 echo "Add ingress"
 kubectl create namespace ingress-nginx
