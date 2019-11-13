@@ -70,3 +70,6 @@ sudo cp ~/.kube/config /var/lib/jenkins/.kube/
 cd /var/lib/jenkins/.kube/
 sudo chown jenkins:jenkins config
 sudo chmod 750 config
+
+echo "kubectl config view"
+kubectl config view
