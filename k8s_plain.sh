@@ -27,7 +27,7 @@ chmod 400 /home/ubuntu/jenk8ns-key-pair.pem
 ssh-keygen -y -f /home/ubuntu/jenk8ns-key-pair.pem > /home/ubuntu/.ssh/id_rsa.pub
 
 echo "Creating cluster..."
-kops create cluster --dns-zone jonathanzhuo.com --zones us-east-1a --master-size t2.medium --node-size t2.medium --name devopscluster.jonathanzhuo.com --state s3://devopsjonathanzhuo --ssh-public-key /home/ubuntu/.ssh/id_rsa.pub --yes
+kops create cluster --dns-zone jonathanzhuo.com --node-count 2 --zones us-east-1a,us-east-1b,us-east-1c --master-size t2.medium --node-size t2.medium --master-zones us-east-1a --name devopscluster.jonathanzhuo.com --state s3://devopsjonathanzhuo --ssh-public-key /home/ubuntu/.ssh/id_rsa.pub --yes
 echo "Updating cluster..."
 kops update cluster devopscluster.jonathanzhuo.com --yes
 echo "************************ validate cluster **************************"
