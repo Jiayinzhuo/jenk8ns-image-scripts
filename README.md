@@ -25,7 +25,7 @@ Here we setup a nginx to reverse proxy from port 8080 to port 80 and set a serve
 
 #### jenkins
 
-Here we install `jenkins` and start 'jenkins'
+Here we install `jenkins` and start `jenkins`
 
 #### aws (awscli)
 
