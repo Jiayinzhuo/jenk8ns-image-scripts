@@ -21,7 +21,7 @@ Here we install the awscli, java, nginx, python and jq.
 
 #### webserver
 
-Here we setup a nginx to reverse proxy from port 8080 to port 80 and set a server name: `jenkins.thegaijin.xyz`
+Here we setup a nginx to reverse proxy from port 8080 to port 80 and set a server name: `jenkins.jonathanzhuo.com`
 
 #### jenkins
 
@@ -55,6 +55,7 @@ ssh into the image and run the k8s.sh script. This will create the cluster.
 
 to delete the cluster, run
 
-    kops cluster delete <name of cluster> --yes
+    kops delete cluster <name of cluster> --yes
+    kops delete cluster --name="devopscluster.jonathanzhuo.com" --state="s3://devopsjonathanzhuo" --yes
 
 You can also make changes to the k8s.sh file as well as the .env file as per your preferences. They are both there in the `/home/ubuntu` directory.
