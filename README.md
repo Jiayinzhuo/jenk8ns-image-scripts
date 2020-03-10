@@ -63,15 +63,15 @@ You can also make changes to the k8s.sh file as well as the .env file as per you
 #### .env
 #### awsconfig.sh
 #### jenk8ns-key-pair.pem
-# jenk8ns-playbook.yml
-### jenk8ns-template.json
-## k8s.sh
+#### jenk8ns-playbook.yml
+#### jenk8ns-template.json
+#### k8s.sh
 
-roles/aws/tasks/main.yml
-roles/docker/tasks/main.yml
-roles/jenkins/tasks/main.yml
-roles/k8s/tasks/main.yml
-roles/setup/tasks/main.yml
-roles/service/tasks/main.yml
-roles/start/tasks/main.yml
-roles/webserver/tasks/main.yml
+#### roles/aws/tasks/main.yml
+#### roles/docker/tasks/main.yml
+#### roles/jenkins/tasks/main.yml
+#### roles/k8s/tasks/main.yml
+#### roles/setup/tasks/main.yml
+#### roles/service/tasks/main.yml
+#### roles/start/tasks/main.yml
+#### roles/webserver/tasks/main.yml
