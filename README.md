@@ -47,7 +47,7 @@ To create the image make sure you have set the aws credentials in the awscli con
 
 Once the image has been created, head over to AWS images and under my AMI, you should see the newly created image with the image name you set in the packer template.
 
-Create an instance with that image, once it's done being created, copy the instance external IP and head over to `Route53` to create an `A record` with the domain name you set when configuring nginx, in my case, `jenkins.thegaijin.xyz`. An assumption has been made that you already have an existing domain. If you don't have a domain to use.
+Create an instance with that image, once it's done being created, copy the instance external IP and head over to `Route53` to create an `A record` with the domain name you set when configuring nginx, in my case, `jenkins.jonathanzhuo.com`. An assumption has been made that you already have an existing domain.
 
 ssh into the image and run the k8s.sh script. This will create the cluster.
 
