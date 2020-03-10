@@ -25,11 +25,11 @@ Here we setup a nginx to reverse proxy from port 8080 to port 80 and set a serve
 
 #### jenkins
 
-Here we install `jenkins`
+Here we install `jenkins` and start 'jenkins'
 
 #### aws (awscli)
 
-Here we setup the `awscli` such that we can run aws commands in the Jenkins server instance
+Here we setup the `awscli` such that we can run aws commands in the Jenkins server instance. /home/ubuntu/.aws/config, /home/ubuntu/.aws/credentials
 
 #### k8s (kubectl, kops)
 
