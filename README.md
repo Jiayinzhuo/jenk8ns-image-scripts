@@ -60,7 +60,7 @@ to delete the cluster, run
 
 You can also make changes to the k8s.sh file as well as the .env file as per your preferences. They are both there in the `/home/ubuntu` directory.
 
-.env
+#### .env
 awsconfig.sh
 jenk8ns-key-pair.pem
 jenk8ns-playbook.yml
