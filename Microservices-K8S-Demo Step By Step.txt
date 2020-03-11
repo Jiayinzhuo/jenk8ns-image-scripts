@@ -8,6 +8,8 @@ aws iam list-users      # you should see a list of all your IAM users here
 # Because "aws configure" doesn't export these vars for kops to use, we export them now
 export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
 export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
+echo $AWS_ACCESS_KEY_ID
+echo $AWS_SECRET_ACCESS_KEY
 
 packer build jenk8ns-template.json
 ssh -i "jenk8ns-key-pair.pem" ubuntu@ec2-52-207-249-90.compute-1.amazonaws.com
@@ -19,11 +21,11 @@ dig ns jonathanzhuo.com
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 d3d65cf5dfa0418e947cc148c8739bfe
 http://jenkins.jonathanzhuo.com/github-webhook/
-docker-pwd=sunmoon1
-Jenkins-github-token: 8ee32afb59c3ed0db1af94ecb2c71027a2a6af5d
-Jenkins-K8N-Demo: b8998661b9e3811aadecc7920c362706ce98e8e1
+docker-pwd=
+Jenkins-github-token: 
+Jenkins-K8N-Demo: 
 admin
-tORzSfdSQVAsJ8e4PH18oOFmtj21fwtZ
+
 
 
 
